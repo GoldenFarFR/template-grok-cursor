@@ -1,42 +1,45 @@
 # template-grok-cursor
 
-Template GitHub pour démarrer un projet avec **Grok Build** et **Cursor**, règles en français incluses.
+Template GitHub pour démarrer chaque nouveau projet avec **Grok Build** et **Cursor** — **réponses toujours en français**.
+
+## Règle principale (incluse automatiquement)
+
+Fichier : `.cursor/rules/francais.md`
+
+```markdown
+Toujours répondre en français.
+```
+
+À chaque nouveau projet créé depuis ce template, cette règle est **copiée dans le dépôt** et chargée automatiquement par Cursor et Grok. Aucune action manuelle requise par projet.
 
 ## Contenu
 
 ```
 .
-├── .cursor/rules/       # Règles Cursor (langue, conventions)
-├── .grok/               # Config et instructions Grok
-│   ├── AGENTS.md
+├── .cursor/rules/
+│   ├── francais.md      # ← règle langue (alwaysApply: true)
+│   └── conventions.md
+├── .grok/
+│   ├── AGENTS.md        # même règle côté Grok
 │   └── config.toml.example
-├── AGENTS.md            # Instructions racine (lus par Grok)
+├── AGENTS.md
 └── README.md
 ```
 
-## Utilisation
+## Nouveau projet (à chaque fois)
 
-### Nouveau projet depuis ce template
-
-1. Sur GitHub : **Use this template** → **Create a new repository**
+1. GitHub → [template-grok-cursor](https://github.com/GoldenFarFR/template-grok-cursor) → **Use this template** → **Create a new repository**
 2. Cloner le nouveau dépôt
-3. Ouvrir dans Cursor et lancer Grok
+3. Ouvrir dans Cursor — la règle française est déjà active
 
-### Configuration globale (une fois par machine)
+## Configuration globale (une seule fois par PC)
 
-Copier manuellement sur chaque PC :
+Optionnel, pour avoir le français **hors projet** (dossier home, sessions sans repo) :
 
-| Fichier source | Destination |
+| Fichier dans le template | Copier vers |
 |---|---|
 | `.cursor/rules/francais.md` | `~/.cursor/rules/francais.md` |
 | `.grok/AGENTS.md` | `~/.grok/AGENTS.md` |
-| `.grok/config.toml.example` | `~/.grok/config.toml` (éditer les tokens) |
-
-### Personnaliser
-
-- Ajoutez des règles dans `.cursor/rules/`
-- Éditez `AGENTS.md` et `.grok/AGENTS.md` pour vos conventions de projet
-- Dupliquez `config.toml.example` en `config.toml` locale (gitignored)
 
 ## Licence
 
