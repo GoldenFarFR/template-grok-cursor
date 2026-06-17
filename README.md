@@ -21,10 +21,31 @@ Toujours répondre en français.
 │   └── conventions.md
 ├── .grok/
 │   ├── AGENTS.md        # même règle côté Grok
-│   └── config.toml.example
+│   ├── config.toml.example
+│   └── skills/
+│       └── install-skill/   # procédure d'audit + installation de skills
 ├── AGENTS.md
 └── README.md
 ```
+
+## Skills inclus
+
+| Skill | Rôle |
+|-------|------|
+| `install-skill` | Auditer, installer et valider un nouveau skill avant ajout au template |
+
+### Ajouter un skill au template
+
+1. Envoyer le lien ou la source à Grok dans ce dépôt
+2. Lancer `/install-skill` — la procédure couvre :
+   - audit sécurité (scripts, commandes, secrets)
+   - détection de doublons (template + skills globaux + bundled Grok)
+   - qualité et efficacité du SKILL.md
+   - test via `grok inspect` et invocation `/nom`
+   - mise à jour du README et commit Git
+3. Ne jamais copier un skill internet sans passer par cette procédure
+
+Checklist imprimable : `.grok/skills/install-skill/references/checklist.md`
 
 ## Nouveau projet (à chaque fois)
 
