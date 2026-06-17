@@ -1,0 +1,17 @@
+# Secrets — ne jamais committer
+.grok/config.toml
+.env
+.env.*
+*.pem
+*.key
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Éditeurs
+.idea/
+.vscode/
+*.swp
+*~
