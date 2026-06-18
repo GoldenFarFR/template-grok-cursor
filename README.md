@@ -34,7 +34,7 @@ Toujours répondre en français.
 
 Fichier : [`.grok/references/site-fonctionnel.md`](.grok/references/site-fonctionnel.md)
 
-Structure de codage validée en prod (Aria Vanguard) pour créer rapidement un site statique Vite + React + Privy branché sur le backend DEXPulse. L'agent doit le lire avant tout nouveau site holding / vitrine.
+Structure de codage validée en prod (Aria Vanguard + Harmony) pour créer rapidement un site statique Vite + React + Privy branché sur le backend DEXPulse. Procédure complète : repo → code → `setup-holding-render.ps1 -UpdateCors` → Privy origins → tests. L'agent doit le lire avant tout nouveau site holding / vitrine.
 
 ## Skills inclus
 
