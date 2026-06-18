@@ -48,6 +48,8 @@ Exemples enrichis (phase 2) : `aria-vanguard`, `kikou`.
 | Skill | Rôle |
 |-------|------|
 | `install-skill` | Auditer, installer et valider un nouveau skill avant ajout au template |
+| `spawn-holding-site` | Site lambda holding (Privy + Render) — à la demande |
+| `graft-mini-games` | Mini-jeux sur accueil (poster fixe + preview au survol) — à la demande |
 
 ### Ajouter un skill au template
 
