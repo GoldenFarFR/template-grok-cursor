@@ -43,6 +43,20 @@ Skills du template : `disable-model-invocation: true` — disponibles via `/nom`
 
 Exemples enrichis (phase 2) : `aria-vanguard`, `kikou`.
 
+## Écosystème GoldenFar / Aria
+
+Carte officielle des repos : [dexpulse/docs/ECOSYSTEM-REPOS.md](https://github.com/GoldenFarFR/dexpulse/blob/master/docs/ECOSYSTEM-REPOS.md)  
+Référence locale : [`.grok/references/ecosystem-repos.md`](.grok/references/ecosystem-repos.md)  
+Patterns backend ARIA : [`.grok/references/aria-backend-patterns.md`](.grok/references/aria-backend-patterns.md)
+
+| Repo | Rôle |
+|------|------|
+| `dexpulse` | Produit + ARIA runtime |
+| `aria-vanguard` | Site holding |
+| `aria-skills` | Skills Grok (SSOT métier) |
+| `template-grok-cursor` | Ce template (bootstrap) |
+| `dexpulse-secrets` | Secrets deploy (hors Aria API) |
+
 ## Skills inclus
 
 | Skill | Rôle |
