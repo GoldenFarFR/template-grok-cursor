@@ -20,7 +20,7 @@ user-invocable: true
 | Skill | Déclencheur explicite |
 |-------|----------------------|
 | `spawn-holding-site` | site holding, Privy, « comme Kikou » |
-| `graft-mini-games` | mini-jeux sur accueil, poster fixe + animation au survol |
+| `graft-mini-games` | mini-jeux sur accueil — **dans `aria-skills`**, pas le template |
 | `paris-sportifs` | app / site paris sportifs |
 | `install-skill` | installer une skill externe |
 

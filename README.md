@@ -49,7 +49,8 @@ Exemples enrichis (phase 2) : `aria-vanguard`, `kikou`.
 |-------|------|
 | `install-skill` | Auditer, installer et valider un nouveau skill avant ajout au template |
 | `spawn-holding-site` | Site lambda holding (Privy + Render) — à la demande |
-| `graft-mini-games` | Mini-jeux sur accueil (poster fixe + preview au survol) — à la demande |
+
+Skills métier Aria (mini-jeux, marketing, vision) : repo privé [aria-skills](https://github.com/GoldenFarFR/aria-skills) — `scripts/install.ps1` pour les lier dans `~/.grok/skills/`.
 
 ### Ajouter un skill au template
 

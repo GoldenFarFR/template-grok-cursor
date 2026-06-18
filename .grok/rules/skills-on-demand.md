@@ -19,7 +19,7 @@ alwaysApply: true
 | « site holding », « comme Kikou », « lambda Privy », `/spawn-holding-site` | Lire **uniquement** `.grok/skills/spawn-holding-site/SKILL.md` |
 | `/nom-skill` ou « utilise la skill X » | Lire **uniquement** la skill nommée |
 | « app paris sportifs » (quand la skill existe) | Lire **uniquement** `.grok/skills/paris-sportifs/SKILL.md` |
-| « mini-jeux », « jeux sur l'accueil », `/graft-mini-games` | Lire **uniquement** `.grok/skills/graft-mini-games/SKILL.md` |
+| « mini-jeux », « jeux sur l'accueil », `/graft-mini-games` | Lire **uniquement** `aria-skills/.grok/skills/graft-mini-games/SKILL.md` (repo `GoldenFarFR/aria-skills`) |
 
 ## Quand ne PAS charger
 
