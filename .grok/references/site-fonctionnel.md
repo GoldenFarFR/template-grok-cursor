@@ -277,10 +277,30 @@ services:
 - [ ] `.\sync-all.ps1` vers Render
 - [ ] Tester `POST /api/auth/privy/login` (401 sans token, pas 503)
 
-### Phase 4 — Déploiement
-- [ ] Connecter repo GitHub à Render static site
-- [ ] Appliquer `render.yaml`, domaine custom, HTTPS
-- [ ] Vérifier bundle prod : pas d'erreur `VITE_PRIVY_APP_ID is not configured`
+### Phase 4 — Déploiement Render (automatisé)
+
+Depuis `projets/dexpulse-secrets` (clé `.render-api-key` requise) :
+
+```powershell
+cd projets/dexpulse-secrets
+.\setup-holding-render.ps1 -SiteName <nom-du-site> -Repo GoldenFarFR/<nom-du-site> -Branch master -UpdateCors
+.\sync-render.ps1
+```
+
+Le script :
+1. Crée le **static site** Render (ou resync si déjà existant)
+2. Injecte `VITE_DEXPULSE_URL`, `VITE_DEXPULSE_API_URL`, `VITE_PRIVY_APP_ID` (copié depuis aria-vanguard)
+3. Enregistre le service dans `site.config.json` → `holdingSites.<nom>`
+4. Avec `-UpdateCors` : ajoute l’URL Render à `CORS_ORIGINS` → `sync-render.ps1` pousse vers le backend
+
+Ensuite dans le repo du site :
+- [ ] Mettre à jour `src/lib/site.ts` (`SITE_DOMAIN` = slug Render ou domaine custom)
+- [ ] Commit + push → Render redéploie automatiquement
+
+**Privy Dashboard** (manuel, une fois par URL) :
+- [ ] Allowed origins → ajouter `https://<slug>.onrender.com` et `http://localhost:5175`
+
+Option manuelle : Render Dashboard → New Static Site → repo GitHub → `render.yaml`.
 
 ### Phase 5 — Validation prod
 - [ ] Visiteur anonyme : contenu + chat OK (`X-Visitor-Id`)
@@ -325,6 +345,8 @@ services:
 | Vérif JWT Privy | `projets/dexpulse/backend/app/auth/privy_verify.py` |
 | Handoff produit | `projets/dexpulse/frontend/src/lib/session-handoff.ts` |
 | Secrets Render | `projets/dexpulse-secrets/` + `sync-all.ps1` |
+| Deploy static site | `dexpulse-secrets/setup-holding-render.ps1` |
+| Exemple holdingSites | `site.config.json` → `holdingSites.harmony` |
 | Vision produit | `projets/dexpulse/VISION.md` |
 | Doc Privy identity tokens | [docs.privy.io — Identity tokens](https://docs.privy.io/user-management/users/identity-tokens) |
 
