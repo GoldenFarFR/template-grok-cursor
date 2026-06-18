@@ -321,6 +321,7 @@ Option manuelle : Render Dashboard → New Static Site → repo GitHub → `rend
 | Privy OK mais pas membre | Pas cliqué « Activer l'accès » | Normal — session backend ≠ session Privy |
 | Handoff DEXPulse échoue | `importVanguardSession()` pas appelé au boot produit | Appeler dans `main.tsx` du frontend produit |
 | 401 sur `/auth/privy/login` | `PRIVY_JWT_VERIFICATION_KEY` incorrect | Resync secrets Render |
+| **« Failed to fetch »** après Privy OK | CORS backend pas encore redéployé avec l’URL du nouveau site | `setup-holding-render.ps1 -UpdateCors` puis attendre **1–2 min** ; vérifier header `access-control-allow-origin` sur `/api/auth/required` |
 
 ---
 
