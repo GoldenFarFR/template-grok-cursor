@@ -22,11 +22,19 @@ Toujours répondre en français.
 ├── .grok/
 │   ├── AGENTS.md        # même règle côté Grok
 │   ├── config.toml.example
+│   ├── references/
+│   │   └── site-fonctionnel.md   # ← blueprint site holding (auth Privy + API)
 │   └── skills/
 │       └── install-skill/   # procédure d'audit + installation de skills
 ├── AGENTS.md
 └── README.md
 ```
+
+## Blueprint site fonctionnel
+
+Fichier : [`.grok/references/site-fonctionnel.md`](.grok/references/site-fonctionnel.md)
+
+Structure de codage validée en prod (Aria Vanguard) pour créer rapidement un site statique Vite + React + Privy branché sur le backend DEXPulse. L'agent doit le lire avant tout nouveau site holding / vitrine.
 
 ## Skills inclus
 
