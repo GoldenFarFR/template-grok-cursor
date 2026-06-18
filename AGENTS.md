@@ -8,4 +8,8 @@ Avant tout scaffold ou feature site statique connecté à DEXPulse, lire **en en
 
 `.grok/references/site-fonctionnel.md`
 
-Référence prod : `GoldenFarFR/aria-vanguard`. Ne pas réinventer l'auth Privy — reproduire la structure validée.
+**Livrer un site lambda** : page d'accueil statique + connexion Privy + deploy Render. **Ne pas enrichir** sauf demande explicite.
+
+Copier `.grok/references/scaffold/`, renommer les constantes, puis build → deploy → Privy origins.
+
+Références enrichies (phase 2) : `GoldenFarFR/aria-vanguard`, `GoldenFarFR/harmony`.

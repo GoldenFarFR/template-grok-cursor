@@ -2,6 +2,7 @@
 .grok/config.toml
 .env
 .env.*
+!.env.example
 *.pem
 *.key
 
@@ -15,3 +16,7 @@ desktop.ini
 .vscode/
 *.swp
 *~
+
+# Build scaffold (test local uniquement)
+node_modules/
+dist/

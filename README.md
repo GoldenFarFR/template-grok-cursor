@@ -23,19 +23,23 @@ Toujours répondre en français.
 │   ├── AGENTS.md        # même règle côté Grok
 │   ├── config.toml.example
 │   ├── references/
-│   │   ├── site-fonctionnel.md   # ← blueprint site holding (auth Privy + API)
-│   │   └── scaffold/             # privy-vite-peer.ts + vite.config.ts (build sans wallet crypto)
+│   │   ├── site-fonctionnel.md   # ← blueprint site lambda (accueil + Privy)
+│   │   └── scaffold/             # site Vite/React minimal à copier vers chaque nouveau repo
 │   └── skills/
 │       └── install-skill/   # procédure d'audit + installation de skills
 ├── AGENTS.md
 └── README.md
 ```
 
-## Blueprint site fonctionnel
+## Blueprint site lambda
 
 Fichier : [`.grok/references/site-fonctionnel.md`](.grok/references/site-fonctionnel.md)
 
-Structure de codage validée en prod (Aria Vanguard + Harmony) pour créer rapidement un site statique Vite + React + Privy branché sur le backend DEXPulse. Procédure complète : repo → code → `setup-holding-render.ps1 -UpdateCors` → Privy origins → tests. L'agent doit le lire avant tout nouveau site holding / vitrine.
+À chaque **nouveau repo** : livrer un site **minimal** (accueil statique + Privy + deploy Render). Copier [`.grok/references/scaffold/`](.grok/references/scaffold/) et renommer les constantes. Le contenu riche (sections, API, DEXPulse) s'ajoute **plus tard** quand l'utilisateur alimente le site.
+
+Procédure : repo → scaffold → `npm run build` → `setup-holding-render.ps1 -UpdateCors` → Privy origins → test auth.
+
+Exemples enrichis (phase 2) : `aria-vanguard`, `harmony`.
 
 ## Skills inclus
 
