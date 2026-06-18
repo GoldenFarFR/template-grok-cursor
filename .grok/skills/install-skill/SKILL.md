@@ -96,7 +96,8 @@ Si doute : **rejeter** ou **durcir** le skill (ajouter garde-fous) avant merge.
 - [ ] Un skill = un workflow (pas de fourre-tout)
 - [ ] Instructions actionnables — pas de prose vague
 - [ ] Taille raisonnable (< ~500 lignes ; scinder si plus)
-- [ ] `when-to-use` ou `description` suffisamment spécifique pour l'invocation auto
+- [ ] `disable-model-invocation: true` sur toute skill template (sauf exception documentée)
+- [ ] `description` précise avec « Utiliser UNIQUEMENT quand… » — pas d'invocation auto large
 
 ### Adaptation template
 

@@ -37,9 +37,11 @@ Fichier : [`.grok/references/site-fonctionnel.md`](.grok/references/site-fonctio
 
 À chaque **nouveau repo** : livrer un site **minimal** (accueil statique + Privy + deploy Render). Copier [`.grok/references/scaffold/`](.grok/references/scaffold/) et renommer les constantes. Le contenu riche (sections, API, DEXPulse) s'ajoute **plus tard** quand l'utilisateur alimente le site.
 
-Procédure : repo → scaffold → `npm run build` → `setup-holding-render.ps1 -UpdateCors` (sync + redeploy CORS + vérif auto) → Privy origins → test auth.
+Procédure holding : `/spawn-holding-site <nom>` (skill à la demande, pas chargée par défaut).
 
-Exemples enrichis (phase 2) : `aria-vanguard`, `lucky`.
+Skills du template : `disable-model-invocation: true` — disponibles via `/nom`, pas auto-chargées. Voir `.grok/rules/skills-on-demand.md`.
+
+Exemples enrichis (phase 2) : `aria-vanguard`, `kikou`.
 
 ## Skills inclus
 

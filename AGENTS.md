@@ -2,14 +2,15 @@
 
 Toujours répondre en français.
 
-## Créer un nouveau site (holding / vitrine)
+## Skills — à la demande uniquement
 
-Avant tout scaffold ou feature site statique connecté à DEXPulse, lire **en entier** :
+Voir `.grok/rules/skills-on-demand.md`.
 
-`.grok/references/site-fonctionnel.md`
+- **Site web générique** → aucune skill.
+- **Site holding / Privy** → `/spawn-holding-site` ou skill du même nom uniquement.
 
-**Livrer un site lambda** : page d'accueil statique + connexion Privy + deploy Render. **Ne pas enrichir** sauf demande explicite.
+## Conventions
 
-Copier `.grok/references/scaffold/`, renommer les constantes, puis build → `setup-holding-render.ps1 -UpdateCors` (redeploy CORS auto) → Privy origins.
-
-Références enrichies (phase 2) : `GoldenFarFR/aria-vanguard`, `GoldenFarFR/lucky`.
+- Modifier uniquement le code requis par la tâche.
+- Respecter le style, les types et les abstractions existants.
+- Réutiliser les fonctions et composants déjà présents plutôt que de réimplémenter.
