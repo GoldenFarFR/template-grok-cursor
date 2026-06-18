@@ -18,15 +18,18 @@ Toujours répondre en français.
 .
 ├── .cursor/rules/
 │   ├── francais.md      # ← règle langue (alwaysApply: true)
+│   ├── vision.md        # ← alignement VISION.md GoldenFar (alwaysApply)
 │   └── conventions.md
 ├── .grok/
 │   ├── AGENTS.md        # même règle côté Grok
+│   ├── rules/vision-enforcer.md
 │   ├── config.toml.example
 │   ├── references/
 │   │   ├── site-fonctionnel.md   # ← blueprint site lambda (accueil + Privy)
 │   │   └── scaffold/             # site Vite/React minimal à copier vers chaque nouveau repo
 │   └── skills/
 │       └── install-skill/   # procédure d'audit + installation de skills
+├── VISION.md            # pointe vers dexpulse SSOT (à personnaliser par repo)
 ├── AGENTS.md
 └── README.md
 ```
