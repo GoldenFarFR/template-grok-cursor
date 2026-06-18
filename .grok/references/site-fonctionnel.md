@@ -9,12 +9,12 @@
 | **Création** (maintenant) | Agent | Page d'accueil standard + connexion Privy + deploy Render |
 | **Enrichissement** (plus tard) | Utilisateur + agent | Sections, API, DEXPulse, design custom, contenu métier |
 
-**Ne pas** copier `aria-vanguard` ou `harmony` en entier pour un nouveau site — ce sont des sites **déjà alimentés**.  
+**Ne pas** copier `aria-vanguard` ou `lucky` en entier pour un nouveau site — ce sont des sites **déjà alimentés**.  
 Copier le **scaffold lambda** : `.grok/references/scaffold/`
 
 Références si besoin d'enrichir plus tard :
 - `projets/aria-vanguard` — holding complet
-- `projets/harmony` — test blueprint enrichi
+- `projets/lucky` — site lambda déployé
 
 ---
 
@@ -41,8 +41,8 @@ Références si besoin d'enrichir plus tard :
 1. Repo depuis `template-grok-cursor`
 2. Copier scaffold lambda + renommer (`SITE_NAME`, `TOKEN_KEY`, port dev)
 3. `npm run build` → push
-4. `setup-holding-render.ps1 -SiteName <nom> -UpdateCors`
-5. Privy Allowed origins → attendre 2 min → tester Sign in + Activate access
+4. `setup-holding-render.ps1 -SiteName <nom> -UpdateCors` (**obligatoire** — sync CORS + redeploy backend + vérif auto)
+5. Privy Allowed origins → tester Sign in + Activate access
 
 ---
 
@@ -134,12 +134,19 @@ cd projets/dexpulse-secrets
 .\setup-holding-render.ps1 -SiteName <nom> -Repo GoldenFarFR/<nom> -Branch master -UpdateCors
 ```
 
+**Toujours passer `-UpdateCors`.** Le script :
+1. ajoute l'URL Render dans `production.env` → `CORS_ORIGINS`
+2. synchronise vers le backend DEXPulse (`sync-render.ps1`)
+3. **force un redéploiement** du backend (sinon `Failed to fetch` côté navigateur)
+4. **vérifie** que `Access-Control-Allow-Origin` répond pour l'URL du site
+
+Si la vérif CORS échoue, le script s'arrête avec une erreur explicite — ne pas considérer le site comme prêt.
+
 Mettre à jour `src/lib/site.ts` (`SITE_DOMAIN`) avec l'URL Render retournée, puis push.
 
 ### 7. Privy + test
 
-- Allowed origins : `https://<slug>.onrender.com` + `http://localhost:<port>`
-- Attendre **1–2 min** après deploy CORS
+- Allowed origins : `https://<slug>-xxxx.onrender.com` (URL exacte affichée par le script) + `http://localhost:<port>`
 - Tester : page OK → Sign in → Activate access → Sign out
 
 ---
@@ -192,15 +199,15 @@ Fichiers **optionnels** (phase enrichissement — ajouter quand l'utilisateur al
 | Symptôme | Fix |
 |----------|-----|
 | Identity token manquant | Identity tokens déjà OK sur l'app existante |
-| Failed to fetch | CORS : `-UpdateCors`, attendre 1–2 min |
+| Failed to fetch (auth API) | Relancer `setup-holding-render.ps1 -SiteName <nom> -UpdateCors` — le script redeploy + vérifie CORS. Ne pas se fier à `sync-render.ps1` seul. |
 | Build Vite peer deps | Copier `privy-vite-peer.ts` + `vite.config.ts` |
-| Privy OK local, KO prod | Allowed origins |
+| Privy OK local, KO prod | Allowed origins Privy (URL Render exacte) |
 
 ---
 
 ## Enrichissement (quand l'utilisateur revient)
 
-L'utilisateur dira ce qu'il veut ajouter. S'inspirer alors de `aria-vanguard` ou `harmony` :
+L'utilisateur dira ce qu'il veut ajouter. S'inspirer alors de `aria-vanguard` ou `lucky` :
 
 - Contenu API → `visitor.ts`, `getSiteContent()`, sections
 - DEXPulse → `dexpulse-handoff.ts`, bouton nav
@@ -213,4 +220,4 @@ L'utilisateur dira ce qu'il veut ajouter. S'inspirer alors de `aria-vanguard` ou
 
 ## Instruction agent (une ligne)
 
-**Nouveau repo** = scaffold lambda (accueil statique + Privy) → build → deploy → origins → test auth. Contenu = plus tard.
+**Nouveau repo** = scaffold lambda → build → `setup-holding-render.ps1 -UpdateCors` (CORS redeploy+vérif) → Privy origins → test auth. Contenu = plus tard.

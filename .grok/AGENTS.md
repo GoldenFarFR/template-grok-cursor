@@ -10,9 +10,11 @@ Avant tout scaffold ou feature site statique connecté à DEXPulse, lire **en en
 
 **Livrer un site lambda** : page d'accueil statique + connexion Privy + deploy Render. **Ne pas enrichir** (sections, API contenu, DEXPulse handoff) sauf demande explicite.
 
-Copier `.grok/references/scaffold/` vers le nouveau repo, renommer les constantes (`SITE_NAME`, `TOKEN_KEY`, port dev), puis build → deploy → Privy origins.
+Copier `.grok/references/scaffold/` vers le nouveau repo, renommer les constantes (`SITE_NAME`, `TOKEN_KEY`, port dev), puis build → `setup-holding-render.ps1 -UpdateCors` → Privy origins.
 
-Références enrichies (phase 2 uniquement) : `GoldenFarFR/aria-vanguard`, `GoldenFarFR/harmony`.
+**`-UpdateCors` obligatoire** : sync CORS, redéploiement forcé du backend DEXPulse, vérification auto (évite `Failed to fetch`).
+
+Références enrichies (phase 2 uniquement) : `GoldenFarFR/aria-vanguard`, `GoldenFarFR/lucky`.
 
 ## Conventions
 
