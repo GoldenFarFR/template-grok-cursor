@@ -80,20 +80,18 @@ Copier depuis `projets/harmony` (plus récent) ou `projets/aria-vanguard` :
 | Port dev (`vite.config.ts`) | `5175` (unique par site) |
 | Design (`index.css`, composants) | libre |
 
-**`package.json` — deps obligatoires** (Privy build échoue sans les peer deps Solana) :
+**`package.json` — deps uniquement** (pas de wallet crypto, pas de blockchain) :
 
 ```json
 {
   "dependencies": {
     "@privy-io/react-auth": "^3.31.0",
-    "@solana-program/system": "^0.12.2",
-    "@solana-program/token": "^0.14.0",
-    "@solana/kit": "^6.10.0",
     "lucide-react": "^1.20.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6"
   },
   "devDependencies": {
+    "@types/node": "^22.15.0",
     "@tailwindcss/vite": "^4.3.1",
     "@vitejs/plugin-react": "^6.0.1",
     "tailwindcss": "^4.3.1",
@@ -102,6 +100,13 @@ Copier depuis `projets/harmony` (plus récent) ou `projets/aria-vanguard` :
   }
 }
 ```
+
+**Build Privy — copier depuis `harmony`** (obligatoire) :
+- `src/shims/privy-vite-peer.ts` — stubs pour le build Vite (auth email/social seulement)
+- `vite.config.ts` — alias vers ce stub (section `privyPeerAliases`)
+- `tsconfig.node.json` → `"types": ["node"]`
+
+Ne pas installer de packages crypto : les stubs suffisent.
 
 ```powershell
 cd projets/<nom-du-site>
@@ -217,7 +222,9 @@ src/
     ├── visitor.ts        # X-Visitor-Id (clé partagée écosystème OK)
     ├── member-profile.ts
     ├── dexpulse-handoff.ts  # ?aria_token=
-    └── cn.ts
+    ├── cn.ts
+    └── shims/
+        └── privy-vite-peer.ts   # stubs build Privy (sans wallet crypto)
 ```
 
 ---
@@ -257,7 +264,7 @@ Paramètre fixe écosystème : `aria_token` (ne pas renommer).
 | Identity token manquant | Identity tokens pas activés (nouvelle app seulement) | Advanced → activer (déjà fait sur l'app existante) |
 | Failed to fetch après Privy OK | CORS backend pas redéployé | `-UpdateCors`, attendre 1–2 min, revérifier curl CORS |
 | Too many requests | Double échange Privy | Un seul échange, pas de polling |
-| Build Vite échoue (Solana) | Peer deps manquantes | Ajouter `@solana/*` au package.json |
+| Build Vite échoue (peer deps Privy) | Stubs manquants | Copier `src/shims/privy-vite-peer.ts` + alias `vite.config.ts` depuis harmony |
 | Privy OK en local, KO en prod | URL absente des Allowed origins | Ajouter slug Render dans Privy Dashboard |
 | Activer l'accès sans effet | Pas cliqué après connexion Privy | Normal — 2 étapes distinctes |
 

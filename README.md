@@ -23,7 +23,8 @@ Toujours répondre en français.
 │   ├── AGENTS.md        # même règle côté Grok
 │   ├── config.toml.example
 │   ├── references/
-│   │   └── site-fonctionnel.md   # ← blueprint site holding (auth Privy + API)
+│   │   ├── site-fonctionnel.md   # ← blueprint site holding (auth Privy + API)
+│   │   └── scaffold/             # privy-vite-peer.ts + vite.config.ts (build sans wallet crypto)
 │   └── skills/
 │       └── install-skill/   # procédure d'audit + installation de skills
 ├── AGENTS.md
