@@ -2,7 +2,10 @@
 
 Ce dépôt fait partie de l'écosystème **Aria / GoldenFar**.
 
-**Vision canonique (SSOT) :** lire et suivre  
-https://github.com/GoldenFarFR/dexpulse/blob/master/VISION.md
+**Vision canonique (SSOT) :**  
+https://github.com/GoldenFarFR/aria-vanguard/blob/main/VISION.md
 
-Pour un produit autonome, remplace ce fichier par une vision locale qui **étend** (sans contredire) la vision DEXPulse.
+**Carte des repos :**  
+https://github.com/GoldenFarFR/aria-vanguard/blob/main/docs/ECOSYSTEM-REPOS.md
+
+Pour un produit autonome, remplace ce fichier par une vision locale qui **étend** (sans contredire) la vision Aria — priorités section 5 et décisions récentes section 8.

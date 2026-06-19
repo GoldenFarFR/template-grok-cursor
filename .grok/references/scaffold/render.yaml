@@ -6,7 +6,7 @@ services:
     staticPublishPath: dist
     envVars:
       - key: VITE_DEXPULSE_API_URL
-        value: https://dexpulse-m3bp.onrender.com/api
+        value: https://test-1-nwf2.onrender.com/api
       - key: VITE_PRIVY_APP_ID
         sync: false
     routes:

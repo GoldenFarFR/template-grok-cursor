@@ -5,6 +5,8 @@ description: >
   template template-grok-cursor. Utiliser quand l'utilisateur envoie un lien ou
   un skill à intégrer au template, demande d'installer une skill, ou lance
   /install-skill. Couvre sécurité, qualité, doublons, tests et documentation.
+disable-model-invocation: true
+user-invocable: true
 metadata:
   short-description: "Auditer et installer un skill dans le template Grok"
   author: template-grok-cursor

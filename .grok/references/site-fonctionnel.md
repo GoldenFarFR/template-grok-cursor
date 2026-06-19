@@ -7,14 +7,14 @@
 | Phase | Qui | Quoi |
 |-------|-----|------|
 | **Création** (maintenant) | Agent | Page d'accueil standard + connexion Privy + deploy Render |
-| **Enrichissement** (plus tard) | Utilisateur + agent | Sections, API, DEXPulse, design custom, contenu métier |
+| **Enrichissement** (plus tard) | Utilisateur + agent | Sections, API, handoff produit, design custom, contenu métier |
 
-**Ne pas** copier `aria-vanguard` ou `lucky` en entier pour un nouveau site — ce sont des sites **déjà alimentés**.  
+**Ne pas** copier `aria-vanguard` ou `kikou` en entier pour un nouveau site — ce sont des sites **déjà alimentés**.  
 Copier le **scaffold lambda** : `.grok/references/scaffold/`
 
 Références si besoin d'enrichir plus tard :
-- `projets/aria-vanguard` — holding complet
-- `projets/lucky` — site lambda déployé
+- `projets/aria-vanguard` — holding complet + API
+- `projets/kikou` — site lambda déployé (exemple)
 
 ---
 
@@ -32,7 +32,7 @@ Références si besoin d'enrichir plus tard :
 ```
 
 **Inclus** : Privy (Sign in → Activate access → Sign out), session backend, deploy Render.  
-**Exclu au départ** : sections portfolio, chat, API contenu, lien DEXPulse, bannière welcome élaborée.
+**Exclu au départ** : sections portfolio, chat, API contenu, lien produit DEXPulse, bannière welcome élaborée.
 
 ---
 
@@ -41,7 +41,7 @@ Références si besoin d'enrichir plus tard :
 1. Repo depuis `template-grok-cursor`
 2. Copier scaffold lambda + renommer (`SITE_NAME`, `TOKEN_KEY`, port dev)
 3. `npm run build` → push
-4. `setup-holding-render.ps1 -SiteName <nom> -UpdateCors` (**obligatoire** — sync CORS + redeploy backend + vérif auto)
+4. `setup-holding-render.ps1 -SiteName <nom> -UpdateCors` (**obligatoire** — sync CORS + redeploy API + vérif auto)
 5. Privy Allowed origins → tester Sign in + Activate access
 
 ---
@@ -50,7 +50,7 @@ Références si besoin d'enrichir plus tard :
 
 **Ne pas créer une nouvelle app Privy.**
 
-- Réutiliser `VITE_PRIVY_APP_ID` (aria-vanguard / `site.config.json` → `privyAppId`)
+- Réutiliser `VITE_PRIVY_APP_ID` (`aria-vanguard/operator/site.config.json` → `privyAppId`)
 - Identity tokens : déjà activés sur l'app existante
 - Par nouveau site : ajouter l'URL Render dans **Allowed origins**
 
@@ -61,7 +61,7 @@ Références si besoin d'enrichir plus tard :
 ### 1. Créer le repo
 
 ```powershell
-cd projets
+cd $env:USERPROFILE\projets
 gh repo create <nom> --template GoldenFarFR/template-grok-cursor --public -c
 ```
 
@@ -114,11 +114,13 @@ Build Privy : `src/shims/privy-vite-peer.ts` + alias dans `vite.config.ts` (four
 ### 4. `.env.example`
 
 ```env
-VITE_DEXPULSE_API_URL=https://dexpulse-m3bp.onrender.com/api
-VITE_PRIVY_APP_ID=<meme-app-que-aria-vanguard>
+# API holding ARIA — auth membre uniquement au départ
+VITE_DEXPULSE_API_URL=https://test-1-nwf2.onrender.com/api
+# Canonique quand DNS+SSL OK : https://api.ariavanguardzhc.com/api
+VITE_PRIVY_APP_ID=<privyAppId depuis site.config.json>
 ```
 
-(`VITE_DEXPULSE_API_URL` sert uniquement à l'auth membre — pas de contenu API au départ.)
+(`VITE_DEXPULSE_API_URL` = nom legacy ; pointe vers l'API `aria-vanguard/backend`.)
 
 ### 5. Build et push
 
@@ -130,14 +132,14 @@ git add -A && git commit -m "feat: site lambda <nom>" && git push
 ### 6. Deploy Render
 
 ```powershell
-cd projets/dexpulse-secrets
+cd $env:USERPROFILE\projets\aria-vanguard\operator
 .\setup-holding-render.ps1 -SiteName <nom> -Repo GoldenFarFR/<nom> -Branch master -UpdateCors
 ```
 
 **Toujours passer `-UpdateCors`.** Le script :
 1. ajoute l'URL Render dans `production.env` → `CORS_ORIGINS`
-2. synchronise vers le backend DEXPulse (`sync-render.ps1`)
-3. **force un redéploiement** du backend (sinon `Failed to fetch` côté navigateur)
+2. synchronise vers l'API holding (`sync-render.ps1`)
+3. **force un redéploiement** de l'API (sinon `Failed to fetch` côté navigateur)
 4. **vérifie** que `Access-Control-Allow-Origin` répond pour l'URL du site
 
 Si la vérif CORS échoue, le script s'arrête avec une erreur explicite — ne pas considérer le site comme prêt.
@@ -177,7 +179,7 @@ Fichiers **optionnels** (phase enrichissement — ajouter quand l'utilisateur al
 | Fichier | Rôle |
 |---------|------|
 | `visitor.ts` | APIs publiques avec `X-Visitor-Id` |
-| `dexpulse-handoff.ts` | Lien produit `?aria_token=` |
+| `product-handoff.ts` | Lien produit `?aria_token=` |
 | `member-profile.ts` + `MemberWelcome.tsx` | Bannière bienvenue |
 | `types.ts` + appels `/aria/content/*` | Contenu dynamique API |
 | Sections / FAQ / chat | Contenu métier |
@@ -199,18 +201,19 @@ Fichiers **optionnels** (phase enrichissement — ajouter quand l'utilisateur al
 | Symptôme | Fix |
 |----------|-----|
 | Identity token manquant | Identity tokens déjà OK sur l'app existante |
-| Failed to fetch (auth API) | Relancer `setup-holding-render.ps1 -SiteName <nom> -UpdateCors` — le script redeploy + vérifie CORS. Ne pas se fier à `sync-render.ps1` seul. |
+| Failed to fetch (auth API) | Relancer `setup-holding-render.ps1 -SiteName <nom> -UpdateCors` — redeploy + vérif CORS |
 | Build Vite peer deps | Copier `privy-vite-peer.ts` + `vite.config.ts` |
 | Privy OK local, KO prod | Allowed origins Privy (URL Render exacte) |
+| Telegram muet après redeploy | Vérifier `getWebhookInfo` — voir `operator_pitfalls.yaml` dans aria-core |
 
 ---
 
 ## Enrichissement (quand l'utilisateur revient)
 
-L'utilisateur dira ce qu'il veut ajouter. S'inspirer alors de `aria-vanguard` ou `lucky` :
+L'utilisateur dira ce qu'il veut ajouter. S'inspirer alors de `aria-vanguard` ou `kikou` :
 
 - Contenu API → `visitor.ts`, `getSiteContent()`, sections
-- DEXPulse → `dexpulse-handoff.ts`, bouton nav
+- Produit DEXPulse → handoff token, bouton nav
 - Bannière membre → `MemberWelcome.tsx`
 - Design → `index.css`, composants
 

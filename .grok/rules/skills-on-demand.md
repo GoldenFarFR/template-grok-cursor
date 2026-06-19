@@ -18,17 +18,19 @@ alwaysApply: true
 | « site web », « landing page », app générique | **Aucune skill** — coder normalement |
 | « site holding », « comme Kikou », « lambda Privy », `/spawn-holding-site` | Lire **uniquement** `.grok/skills/spawn-holding-site/SKILL.md` |
 | `/nom-skill` ou « utilise la skill X » | Lire **uniquement** la skill nommée |
-| « app paris sportifs » (quand la skill existe) | Lire **uniquement** `.grok/skills/paris-sportifs/SKILL.md` |
-| « mini-jeux », « jeux sur l'accueil », `/graft-mini-games` | Lire **uniquement** `aria-skills/.grok/skills/graft-mini-games/SKILL.md` (repo `GoldenFarFR/aria-skills`) |
+| « mini-jeux », « jeux sur l'accueil », `/graft-mini-games` | Lire **uniquement** `aria-skills/.grok/skills/graft-mini-games/SKILL.md` |
+| Marketing Aria, posts, narrative | `aria-skills` → `marketing-decision-framework` |
+| Deploy Render, secrets, nouveau PC | `aria-skills` → `operator-runbook` |
 
 ## Quand ne PAS charger
 
-- Site web simple sans mention holding / Privy / DEXPulse / nom de skill
+- Site web simple sans mention holding / Privy / nom de skill
 - Tâche générique (fix, refactor, question)
 - L'utilisateur n'a pas demandé de workflow métier spécifique
 
 ## Interdit
 
 - Charger `spawn-holding-site` pour un site web ordinaire
-- Fusionner plusieurs workflows (holding + paris sportifs + autre) sans demande
+- Fusionner plusieurs workflows sans demande explicite
 - Lire `site-fonctionnel.md` sauf via la skill `spawn-holding-site` ou demande holding explicite
+- Dupliquer les skills `aria-skills` dans le template — lier via `scripts/install.ps1`

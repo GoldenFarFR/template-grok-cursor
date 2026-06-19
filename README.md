@@ -1,101 +1,105 @@
 # template-grok-cursor
 
-Template GitHub pour démarrer chaque nouveau projet avec **Grok Build** et **Cursor** — **réponses toujours en français**.
+Template GitHub pour démarrer chaque nouveau projet **Aria-ready** avec **Grok Build** et **Cursor** — réponses toujours en **français**.
 
-## Règle principale (incluse automatiquement)
+## Règles incluses (always-on)
 
-Fichier : `.cursor/rules/francais.md`
-
-```markdown
-Toujours répondre en français.
-```
-
-À chaque nouveau projet créé depuis ce template, cette règle est **copiée dans le dépôt** et chargée automatiquement par Cursor et Grok. Aucune action manuelle requise par projet.
+| Fichier | Rôle |
+|---------|------|
+| `.cursor/rules/francais.md` | Langue française |
+| `.cursor/rules/vision.md` | Alignement vision Aria (SSOT `aria-vanguard`) |
+| `.cursor/rules/conventions.md` | Style de code |
+| `.cursor/rules/skills-on-demand.md` | Skills chargées uniquement sur demande |
+| `.grok/rules/vision-enforcer.md` | Garde-fou vision côté Grok |
 
 ## Contenu
 
 ```
 .
-├── .cursor/rules/
-│   ├── francais.md      # ← règle langue (alwaysApply: true)
-│   ├── vision.md        # ← alignement VISION.md GoldenFar (alwaysApply)
-│   └── conventions.md
+├── .cursor/rules/          # Règles Cursor (copiées dans chaque nouveau repo)
 ├── .grok/
-│   ├── AGENTS.md        # même règle côté Grok
-│   ├── rules/vision-enforcer.md
-│   ├── config.toml.example
+│   ├── rules/              # vision-enforcer, skills-on-demand
 │   ├── references/
-│   │   ├── site-fonctionnel.md   # ← blueprint site lambda (accueil + Privy)
-│   │   └── scaffold/             # site Vite/React minimal à copier vers chaque nouveau repo
+│   │   ├── site-fonctionnel.md    # Blueprint site holding lambda
+│   │   ├── ecosystem-repos.md     # Carte GoldenFar 2026
+│   │   ├── aria-backend-patterns.md
+│   │   └── scaffold/              # Site Vite/React + Privy à copier
 │   └── skills/
-│       └── install-skill/   # procédure d'audit + installation de skills
-├── VISION.md            # pointe vers dexpulse SSOT (à personnaliser par repo)
+│       ├── install-skill/         # Audit avant ajout skill au template
+│       └── spawn-holding-site/    # Création site holding (à la demande)
+├── scripts/
+│   └── link-aria-skills.ps1       # Lier aria-skills sur le PC
+├── VISION.md               # Stub → aria-vanguard/VISION.md
 ├── AGENTS.md
 └── README.md
 ```
 
-## Blueprint site lambda
+## Écosystème GoldenFar / Aria (2026)
 
-Fichier : [`.grok/references/site-fonctionnel.md`](.grok/references/site-fonctionnel.md)
-
-À chaque **nouveau repo** : livrer un site **minimal** (accueil statique + Privy + deploy Render). Copier [`.grok/references/scaffold/`](.grok/references/scaffold/) et renommer les constantes. Le contenu riche (sections, API, DEXPulse) s'ajoute **plus tard** quand l'utilisateur alimente le site.
-
-Procédure holding : `/spawn-holding-site <nom>` (skill à la demande, pas chargée par défaut).
-
-Skills du template : `disable-model-invocation: true` — disponibles via `/nom`, pas auto-chargées. Voir `.grok/rules/skills-on-demand.md`.
-
-Exemples enrichis (phase 2) : `aria-vanguard`, `kikou`.
-
-## Écosystème GoldenFar / Aria
-
-Carte officielle des repos : [dexpulse/docs/ECOSYSTEM-REPOS.md](https://github.com/GoldenFarFR/dexpulse/blob/master/docs/ECOSYSTEM-REPOS.md)  
-Référence locale : [`.grok/references/ecosystem-repos.md`](.grok/references/ecosystem-repos.md)  
-Patterns backend ARIA : [`.grok/references/aria-backend-patterns.md`](.grok/references/aria-backend-patterns.md)
+**Vision SSOT :** [aria-vanguard/VISION.md](https://github.com/GoldenFarFR/aria-vanguard/blob/main/VISION.md)  
+**Carte repos :** [aria-vanguard/docs/ECOSYSTEM-REPOS.md](https://github.com/GoldenFarFR/aria-vanguard/blob/main/docs/ECOSYSTEM-REPOS.md)  
+**Référence locale :** [`.grok/references/ecosystem-repos.md`](.grok/references/ecosystem-repos.md)
 
 | Repo | Rôle |
 |------|------|
-| `dexpulse` | Produit + ARIA runtime |
-| `aria-vanguard` | Site holding |
-| `aria-skills` | Skills Grok (SSOT métier) |
-| `template-grok-cursor` | Ce template (bootstrap) |
-| `dexpulse-secrets` | Secrets deploy (hors Aria API) |
+| `aria-vanguard` | Holding + API ARIA + DEXPulse + scripts `operator/` |
+| `aria-sandbox` | Cerveau `aria-core` (runtime pip) |
+| `aria-skills` | Skills Grok/Cursor métier (SSOT) |
+| `template-grok-cursor` | Ce template |
+| `collegue-memoire` | Mémoire opérateur (multi-PC) |
+| ~~`dexpulse`~~ | *Déprécié* — migré dans `aria-vanguard` |
 
-## Skills inclus
+Secrets : coffre `%LOCALAPPDATA%\GoldenFar\vault` — **jamais** dans le repo.
 
-| Skill | Rôle |
-|-------|------|
-| `install-skill` | Auditer, installer et valider un nouveau skill avant ajout au template |
-| `spawn-holding-site` | Site lambda holding (Privy + Render) — à la demande |
+## Skills du template
 
-Skills métier Aria (mini-jeux, marketing, vision) : repo privé [aria-skills](https://github.com/GoldenFarFR/aria-skills) — `scripts/install.ps1` pour les lier dans `~/.grok/skills/`.
+| Skill | Invocation | Rôle |
+|-------|------------|------|
+| `spawn-holding-site` | `/spawn-holding-site <nom>` | Site lambda Privy + Render |
+| `install-skill` | `/install-skill` | Auditer une skill avant ajout au template |
 
-### Ajouter un skill au template
+Toutes ont `disable-model-invocation: true` — pas de chargement automatique. Voir `.grok/rules/skills-on-demand.md`.
 
-1. Envoyer le lien ou la source à Grok dans ce dépôt
-2. Lancer `/install-skill` — la procédure couvre :
-   - audit sécurité (scripts, commandes, secrets)
-   - détection de doublons (template + skills globaux + bundled Grok)
-   - qualité et efficacité du SKILL.md
-   - test via `grok inspect` et invocation `/nom`
-   - mise à jour du README et commit Git
-3. Ne jamais copier un skill internet sans passer par cette procédure
-
-Checklist imprimable : `.grok/skills/install-skill/references/checklist.md`
+**Skills métier** (marketing, vision, deploy, mini-jeux) : repo [aria-skills](https://github.com/GoldenFarFR/aria-skills) — ne pas les dupliquer ici.
 
 ## Nouveau projet (à chaque fois)
 
 1. GitHub → [template-grok-cursor](https://github.com/GoldenFarFR/template-grok-cursor) → **Use this template** → **Create a new repository**
-2. Cloner le nouveau dépôt
-3. Ouvrir dans Cursor — la règle française est déjà active
+2. Cloner le nouveau dépôt dans `%USERPROFILE%\projets\`
+3. Ouvrir dans Cursor — règles FR + vision déjà actives
+4. Site holding ? → `/spawn-holding-site <nom>` (lit `site-fonctionnel.md` + scaffold)
 
-## Configuration globale (une seule fois par PC)
+## Setup PC opérateur (une fois)
 
-Optionnel, pour avoir le français **hors projet** (dossier home, sessions sans repo) :
+```powershell
+# Skills métier Aria (vision-enforcer, marketing, operator-runbook, …)
+cd $env:USERPROFILE\projets\template-grok-cursor
+.\scripts\link-aria-skills.ps1
 
-| Fichier dans le template | Copier vers |
-|---|---|
+# Écosystème complet (optionnel)
+cd $env:USERPROFILE\projets\aria-vanguard\operator
+.\new-pc.ps1
+```
+
+## Configuration globale IDE (optionnel)
+
+| Fichier template | Copier vers |
+|------------------|-------------|
 | `.cursor/rules/francais.md` | `~/.cursor/rules/francais.md` |
 | `.grok/AGENTS.md` | `~/.grok/AGENTS.md` |
+
+## Blueprint site lambda
+
+[`.grok/references/site-fonctionnel.md`](.grok/references/site-fonctionnel.md) — accueil + Privy + Render.  
+Exemples enrichis : `aria-vanguard`, `kikou`.
+
+Deploy : `aria-vanguard/operator/setup-holding-render.ps1 -SiteName <nom> -UpdateCors`
+
+## Ajouter un skill au template
+
+1. Envoyer la source à Grok dans ce dépôt
+2. Lancer `/install-skill` (audit sécurité, doublons, tests)
+3. Checklist : `.grok/skills/install-skill/references/checklist.md`
 
 ## Licence
 
