@@ -4,14 +4,12 @@ Toujours répondre en français.
 
 ## Vision Aria
 
-Lire `VISION.md` à la racine. SSOT : [aria-vanguard/VISION.md](https://github.com/GoldenFarFR/aria-vanguard/blob/main/VISION.md).  
-Carte repos : [ECOSYSTEM-REPOS.md](https://github.com/GoldenFarFR/aria-vanguard/blob/main/docs/ECOSYSTEM-REPOS.md).
+Lire `VISION.md` à la racine. SSOT : [ARIA/VISION.md](https://github.com/GoldenFarFR/ARIA/blob/main/VISION.md) (monorepo `ARIA`, anciennement `aria-vanguard`).  
+Carte repos : [ARIA/vanguard/docs/ECOSYSTEM-REPOS.md](https://github.com/GoldenFarFR/ARIA/blob/main/vanguard/docs/ECOSYSTEM-REPOS.md).
 
-Ne plus utiliser `dexpulse` ni `dexpulse-secrets` (dépréciés juin 2026).
+Ne plus utiliser `dexpulse` ni `dexpulse-secrets` (dépréciés juin 2026, fusionnés dans `ARIA`).
 
 ## Skills — à la demande uniquement
-
-Voir `.grok/rules/skills-on-demand.md`.
 
 - **Site web générique** → aucune skill.
 - **Site holding / Privy / « comme Kikou »** → `/spawn-holding-site` uniquement.

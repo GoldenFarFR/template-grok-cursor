@@ -29,7 +29,7 @@ Lire **en entier** : `.grok/references/site-fonctionnel.md`
 1. `gh repo create <nom> --template GoldenFarFR/template-grok-cursor --public --clone`
 2. Copier `.grok/references/scaffold/` → racine du repo ; renommer `SITE_NAME`, `TOKEN_KEY`, préfixe storage, port dev unique
 3. `npm install && npm run build` → commit → push
-4. `cd $env:USERPROFILE\projets\aria-vanguard\operator` → `.\setup-holding-render.ps1 -SiteName <nom> -UpdateCors`
+4. `cd $env:USERPROFILE\projets\aria-ops\vanguard\operator` → `.\setup-holding-render.ps1 -SiteName <nom> -UpdateCors`
 5. Mettre à jour `src/lib/site.ts` (`SITE_DOMAIN`) avec l'URL Render affichée → push
 6. Rappeler à l'utilisateur : ajouter l'URL + `http://localhost:<port>` dans Privy Allowed origins
 

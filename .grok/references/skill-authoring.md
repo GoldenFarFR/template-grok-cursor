@@ -13,7 +13,7 @@ user-invocable: true
 ---
 ```
 
-`disable-model-invocation: true` → l'agent ne l'active pas tout seul ; l'utilisateur lance `/mon-workflow` ou la demande est **explicite** (voir `.grok/rules/skills-on-demand.md`).
+`disable-model-invocation: true` → l'agent ne l'active pas tout seul ; l'utilisateur lance `/mon-workflow` ou la demande est **explicite** (voir la section « Skills — à la demande uniquement » de `AGENTS.md`).
 
 ## Exemples futurs
 

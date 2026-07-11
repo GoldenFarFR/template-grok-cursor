@@ -9,11 +9,11 @@
 | **Création** (maintenant) | Agent | Page d'accueil standard + connexion Privy + deploy Render |
 | **Enrichissement** (plus tard) | Utilisateur + agent | Sections, API, handoff produit, design custom, contenu métier |
 
-**Ne pas** copier `aria-vanguard` ou `kikou` en entier pour un nouveau site — ce sont des sites **déjà alimentés**.  
+**Ne pas** copier `ARIA` (vitrine `vanguard/`) ou `kikou` en entier pour un nouveau site — ce sont des sites **déjà alimentés**.  
 Copier le **scaffold lambda** : `.grok/references/scaffold/`
 
 Références si besoin d'enrichir plus tard :
-- `projets/aria-vanguard` — holding complet + API
+- `projets/ARIA/vanguard` — holding complet + API (monorepo `ARIA`, anciennement `aria-vanguard`)
 - `projets/kikou` — site lambda déployé (exemple)
 
 ---
@@ -50,7 +50,7 @@ Références si besoin d'enrichir plus tard :
 
 **Ne pas créer une nouvelle app Privy.**
 
-- Réutiliser `VITE_PRIVY_APP_ID` (`aria-vanguard/operator/site.config.json` → `privyAppId`)
+- Réutiliser `VITE_PRIVY_APP_ID` (`aria-ops/vanguard/operator/site.config.json` → `privyAppId`)
 - Identity tokens : déjà activés sur l'app existante
 - Par nouveau site : ajouter l'URL Render dans **Allowed origins**
 
@@ -120,7 +120,7 @@ VITE_DEXPULSE_API_URL=https://test-1-nwf2.onrender.com/api
 VITE_PRIVY_APP_ID=<privyAppId depuis site.config.json>
 ```
 
-(`VITE_DEXPULSE_API_URL` = nom legacy ; pointe vers l'API `aria-vanguard/backend`.)
+(`VITE_DEXPULSE_API_URL` = nom legacy ; pointe vers l'API `ARIA/vanguard/backend`.)
 
 ### 5. Build et push
 
@@ -132,7 +132,7 @@ git add -A && git commit -m "feat: site lambda <nom>" && git push
 ### 6. Deploy Render
 
 ```powershell
-cd $env:USERPROFILE\projets\aria-vanguard\operator
+cd $env:USERPROFILE\projets\aria-ops\vanguard\operator
 .\setup-holding-render.ps1 -SiteName <nom> -Repo GoldenFarFR/<nom> -Branch master -UpdateCors
 ```
 
@@ -210,7 +210,7 @@ Fichiers **optionnels** (phase enrichissement — ajouter quand l'utilisateur al
 
 ## Enrichissement (quand l'utilisateur revient)
 
-L'utilisateur dira ce qu'il veut ajouter. S'inspirer alors de `aria-vanguard` ou `kikou` :
+L'utilisateur dira ce qu'il veut ajouter. S'inspirer alors de `ARIA` (vitrine `vanguard/`) ou `kikou` :
 
 - Contenu API → `visitor.ts`, `getSiteContent()`, sections
 - Produit DEXPulse → handoff token, bouton nav
