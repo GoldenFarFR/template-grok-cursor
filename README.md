@@ -1,5 +1,9 @@
 # template-grok-cursor
 
+> **Archivé (13/07/2026)** : Cursor/Grok ne sont plus utilisés pour la construction
+> d'ARIA — Claude Code gère 100% du développement depuis. Conservé pour
+> référence historique uniquement, plus de mise à jour prévue.
+
 Template GitHub pour démarrer chaque nouveau projet **Aria-ready** avec **Grok Build** et **Cursor** — réponses toujours en **français**.
 
 ## Règles incluses (always-on)
